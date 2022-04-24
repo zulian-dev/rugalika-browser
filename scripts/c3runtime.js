@@ -4493,14 +4493,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.OnLayoutEnd,
 		C3.Plugins.Audio.Acts.Stop,
 		C3.Plugins.Sprite.Cnds.OnCreated,
-		C3.Plugins.Sprite.Cnds.IsBoolInstanceVarSet,
-		C3.Plugins.Sprite.Acts.SetBoolInstanceVar,
-		C3.Plugins.Sprite.Acts.SetAnim,
-		C3.Plugins.Audio.Acts.Play,
-		C3.Plugins.Sprite.Acts.Spawn,
-		C3.Plugins.Sprite.Acts.SetScale,
-		C3.Plugins.Sprite.Acts.SetAngle,
-		C3.Plugins.System.Acts.Wait,
 		C3.Plugins.System.Acts.SetLayoutEffectEnabled,
 		C3.Plugins.System.Cnds.CompareBoolVar,
 		C3.Plugins.System.Acts.SetBoolVar,
@@ -4508,7 +4500,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.SetTimescale,
 		C3.Behaviors.scrollto.Acts.SetEnabled,
 		C3.Plugins.System.Cnds.Else,
-		C3.ScriptsInEvents.Game_Event18_Act1,
+		C3.ScriptsInEvents.Game_Event16_Act1,
 		C3.Plugins.System.Acts.CreateObject,
 		C3.Plugins.System.Cnds.EveryTick,
 		C3.Plugins.Spritefont2.Acts.AddInstanceVar,
@@ -4529,6 +4521,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.solid.Acts.SetEnabled,
 		C3.Plugins.Sprite.Cnds.CompareX,
 		C3.Plugins.Sprite.Cnds.IsOverlapping,
+		C3.Plugins.Sprite.Acts.SetAnim,
 		C3.Plugins.System.Cnds.CompareVar,
 		C3.Plugins.System.Cnds.Compare,
 		C3.Plugins.System.Acts.CreateObjectByName,
@@ -4539,14 +4532,19 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Cnds.OnCollision,
 		C3.Plugins.Sprite.Acts.SetInstanceVar,
 		C3.Plugins.Sprite.Acts.Destroy,
+		C3.Plugins.Sprite.Acts.Spawn,
 		C3.Plugins.System.Acts.SubVar,
 		C3.Plugins.Sprite.Cnds.IsOutsideLayout,
 		C3.Plugins.Sprite.Acts.SetPosToObject,
+		C3.Plugins.Sprite.Cnds.IsBoolInstanceVarSet,
 		C3.Behaviors.EightDir.Cnds.IsMoving,
+		C3.Plugins.Audio.Acts.Play,
 		C3.Plugins.Particles.Acts.SetAngle,
 		C3.Behaviors.scrollto.Acts.Shake,
+		C3.Plugins.Sprite.Acts.SetBoolInstanceVar,
 		C3.Plugins.Sprite.Acts.SubInstanceVar,
 		C3.Behaviors.Flash.Acts.Flash,
+		C3.Plugins.System.Acts.Wait,
 		C3.Plugins.System.Cnds.TriggerOnce,
 		C3.Plugins.Audio.Acts.StopAll,
 		C3.Behaviors.Bullet.Acts.SetEnabled,
@@ -4554,8 +4552,11 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.SetCollisions,
 		C3.Plugins.System.Acts.ResetGlobals,
 		C3.Plugins.System.Acts.GoToLayout,
+		C3.Plugins.Sprite.Acts.SetScale,
+		C3.Plugins.Sprite.Acts.SetAngle,
 		C3.Plugins.Button.Cnds.OnClicked,
 		C3.Plugins.Browser.Acts.Close,
+		C3.Plugins.Spritefont2.Cnds.OnCreated,
 		C3.Plugins.Sprite.Exps.Count,
 		C3.Plugins.System.Exps.int,
 		C3.Plugins.TiledBg.Acts.SetWidth,
@@ -4564,6 +4565,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.EightDir.Acts.SetIgnoreInput,
 		C3.Behaviors.EightDir.Acts.Stop,
 		C3.Plugins.System.Acts.SetObjectTimescale,
+		C3.Plugins.Button.Acts.SetEnabled,
 		C3.ScriptsInEvents._historia_Event1,
 		C3.ScriptsInEvents.Layoutgenerator_Event1_Act1,
 		C3.Plugins.System.Exps.loadingprogress,
@@ -4695,6 +4697,7 @@ self.C3_JsPropNameTable = [
 	{Flash: 0},
 	{LoadingBar: 0},
 	{SpriteFont2: 0},
+	{VERSION: 0},
 	{Enemies: 0},
 	{Pickups: 0},
 	{Players: 0},
@@ -4705,7 +4708,6 @@ self.C3_JsPropNameTable = [
 	{SpawnedEnemies: 0},
 	{GameIsPaused: 0},
 	{Sounds: 0},
-	{CustonAngle: 0},
 	{Value: 0},
 	{X: 0},
 	{Y: 0},
@@ -4723,7 +4725,10 @@ self.C3_JsPropNameTable = [
 	{LastSpawnTime: 0},
 	{Quantidade: 0},
 	{EnemyName: 0},
+	{CustonAngle: 0},
 	{Menu_CharSelector_SelectedChar: 0},
+	{ShotDelayCap: 0},
+	{valueToAdd: 0},
 	{Chance: 0},
 	{LoadingSize: 0}
 ];
@@ -4832,31 +4837,20 @@ self.C3_ExpressionFuncs = [
 		() => 9,
 		() => 0,
 		() => 10,
-		() => 100,
+		() => 30,
 		() => 4,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => ("" + f0());
 		},
 		() => "OST",
-		() => "Shoting",
-		() => -5,
-		() => "effects",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (1 + (n0.ExpInstVar() / 25));
-		},
+		() => "PretoBranco",
+		() => "Pause",
+		() => "Damage numbers",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => v0.GetValue();
 		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpInstVar();
-		},
-		() => "PretoBranco",
-		() => "Pause",
-		() => "Damage numbers",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0();
@@ -4891,7 +4885,6 @@ self.C3_ExpressionFuncs = [
 		() => 20,
 		() => "Enemy3",
 		() => 40,
-		() => 30,
 		() => "EnemyBoss1",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -4907,6 +4900,10 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => (n0.ExpInstVar_Family() - n1.ExpInstVar());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpInstVar();
 		},
 		() => "red",
 		p => {
@@ -4926,6 +4923,23 @@ self.C3_ExpressionFuncs = [
 		() => 0.4,
 		() => "damage",
 		() => 0.1,
+		() => "Shoting",
+		() => -5,
+		() => "effects",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (1 + (n0.ExpInstVar() / 25));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => and(and(((n0.ExpInstVar() * 10) / 100), " - "), (1 - ((n1.ExpInstVar() * 10) / 100)));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (1 - ((n0.ExpInstVar() * 10) / 100));
+		},
+		() => "V 0.0.15",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => (v0.GetValue() + 1);
@@ -4999,12 +5013,12 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => (n0.ExpInstVar() - (n1.ExpInstVar() / 50));
+			return () => (n0.ExpInstVar() + 0.1);
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => (n0.ExpInstVar() + 0.1);
+			const v1 = p._GetNode(1).GetVar();
+			return () => (n0.ExpInstVar() + v1.GetValue());
 		},
 		p => {
 			const n0 = p._GetNode(0);

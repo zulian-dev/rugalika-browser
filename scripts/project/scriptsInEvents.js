@@ -3,7 +3,7 @@
 
 const scriptsInEvents = {
 
-		async Game_Event18_Act1(runtime, localVars)
+		async Game_Event16_Act1(runtime, localVars)
 		{
 			/*var numberString = localvars.Value.toString();
 			for (var i = 0; i < numberString.length; i++){
@@ -19,6 +19,19 @@ const scriptsInEvents = {
 			- Quando sobe mais de um nivel por vez, não esta dando mais de um ponto de upgrade. para testar, pegar um diamante de XP e observar que sobe varios niveis mas só ganha um ponto.
 			
 			- 
+			
+			
+			
+			
+			01 = 1 - 10 
+			
+			
+			1 - 100
+			x - y
+			
+			
+			1 - 
+			
 			
 			
 			*/
@@ -47,9 +60,9 @@ const scriptsInEvents = {
 			
 			for (let currentX=0; currentX<Cols; currentX++) {
 				for (let currentY=0; currentY<Rows; currentY++) {
-					if (!percentChance(Chance)){
-						continue
-					}
+					//if (!percentChance(Chance)){
+					//	continue
+					//}
 					
 					const layout = Math.round( Math.random() * BlockLayoutsCount )
 					
@@ -60,16 +73,19 @@ const scriptsInEvents = {
 					
 					const positionX = BlockLayoutSize * currentX
 					const positionY = BlockLayoutSize * currentY
-					
+					runtime.objects[bgName].createInstance(
+						bgLayerName, positionX, positionY
+					)
+					if (!percentChance(Chance)){
+						continue
+					}
 					runtime.objects[tileName].createInstance(
 						tileLayerName, positionX, positionY
 					)
 					runtime.objects[colisionName].createInstance(
 						buildLayerName, positionX, positionY
 					)
-					runtime.objects[bgName].createInstance(
-						bgLayerName, positionX, positionY
-					)
+					
 				}
 			}
 		}
