@@ -1,0 +1,17 @@
+{
+    "c2dictionary": true,
+    "data": {
+        "IsShoting": "false",
+        "ShotDelay": 1,
+        "Damage": 3,
+        "Money": 0,
+        "XP": 0,
+        "HP": 3,
+        "Level": 1,
+        "PickUpScale": 1,
+        "IsImortal": "false",
+        "Range": 200,
+        "Speed": 200,
+        "Keys": 0
+    }
+}
